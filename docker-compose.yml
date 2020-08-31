@@ -1,0 +1,19 @@
+version: '3'
+services:
+  jenkins:
+    build: ./jenkins-master/
+    ports:
+      - '8080:8080'
+      - '9080:9080'
+      - '50000:50000'
+    volumes:
+      - 'jenkins_data:/var/jenkins_home'
+    environment:
+      DOCKER_HOST: host.docker.internal:2375
+
+  consul:
+    image: consul
+
+volumes:
+  jenkins_data:
+    driver: local
